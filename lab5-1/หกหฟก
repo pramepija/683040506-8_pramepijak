@@ -1,0 +1,373 @@
+import sys
+import sqlite3
+from datetime import datetime
+from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
+                               QHBoxLayout, QLabel, QLineEdit, QPushButton, 
+                               QTableWidget, QTableWidgetItem, QComboBox, 
+                               QHeaderView, QMessageBox, QDateEdit, QFrame, 
+                               QGroupBox, QTabWidget)
+from PySide6.QtCore import Qt, QDate, Slot
+from PySide6.QtGui import QFont, QColor, QIcon
+
+# ตรวจสอบและ import matplotlib สำหรับกราฟ
+try:
+    from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
+    from matplotlib.figure import Figure
+    import matplotlib.pyplot as plt
+    MATPLOTLIB_AVAILABLE = True
+except ImportError:
+    MATPLOTLIB_AVAILABLE = False
+    print("Warning: Matplotlib not found. Chart features will be disabled.")
+
+# --- 1. OOP & Database Layer ---
+
+class Database:
+    """จัดการการเชื่อมต่อ Database SQLite"""
+    def __init__(self, db_name="budget_data.db"):
+        self.conn = sqlite3.connect(db_name)
+        self.create_table()
+
+    def create_table(self):
+        cursor = self.conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS transactions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                date TEXT NOT NULL,
+                category TEXT NOT NULL,
+                amount REAL NOT NULL,
+                type TEXT NOT NULL,
+                note TEXT
+            )
+        """)
+        self.conn.commit()
+
+    def add_transaction(self, trans):
+        cursor = self.conn.cursor()
+        cursor.execute("INSERT INTO transactions (date, category, amount, type, note) VALUES (?, ?, ?, ?, ?)",
+                       (trans.date, trans.category, trans.amount, trans.trans_type, trans.note))
+        self.conn.commit()
+
+    def get_all_transactions(self):
+        cursor = self.conn.cursor()
+        cursor.execute("SELECT * FROM transactions ORDER BY date DESC")
+        return cursor.fetchall()
+
+    def delete_transaction(self, trans_id):
+        cursor = self.conn.cursor()
+        cursor.execute("DELETE FROM transactions WHERE id=?", (trans_id,))
+        self.conn.commit()
+
+# Base Class
+class Transaction:
+    def __init__(self, date, category, amount, note=""):
+        self.date = date
+        self.category = category
+        self.amount = float(amount)
+        self.note = note
+        self.trans_type = "Transaction"
+
+# Inherited Class: Income
+class Income(Transaction):
+    def __init__(self, date, category, amount, note=""):
+        super().__init__(date, category, amount, note)
+        self.trans_type = "Income"
+
+# Inherited Class: Expense
+class Expense(Transaction):
+    def __init__(self, date, category, amount, note=""):
+        super().__init__(date, category, amount, note)
+        self.trans_type = "Expense"
+
+
+# --- 2. GUI Layer (PySide6) ---
+
+class MplCanvas(FigureCanvas):
+    """คลาสสำหรับแสดงกราฟ Matplotlib ใน PySide6 Widget"""
+    def __init__(self, parent=None, width=5, height=4, dpi=100):
+        fig = Figure(figsize=(width, height), dpi=dpi)
+        self.axes = fig.add_subplot(111)
+        super(MplCanvas, self).__init__(fig)
+
+class BudgetApp(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.db = Database()
+        self.setWindowTitle("Personal Budget Tracker (Student Edition)")
+        self.setGeometry(100, 100, 1000, 700)
+        
+        # Style ตกแต่ง GUI ให้ดูทันสมัย
+        self.setStyleSheet("""
+            QMainWindow { background-color: #f5f6fa; }
+            QLabel { font-size: 14px; color: #2f3640; }
+            QLineEdit, QComboBox, QDateEdit { 
+                padding: 8px; border: 1px solid #dcdde1; border-radius: 5px; background-color: white; 
+            }
+            QPushButton { 
+                background-color: #487eb0; color: white; padding: 10px; 
+                border-radius: 5px; font-weight: bold; 
+            }
+            QPushButton:hover { background-color: #40739e; }
+            QPushButton#deleteBtn { background-color: #e74c3c; }
+            QPushButton#deleteBtn:hover { background-color: #c0392b; }
+            QTableWidget { border: 1px solid #dcdde1; gridline-color: #ecf0f1; background-color: white; }
+            QHeaderView::section { background-color: #353b48; color: white; padding: 5px; }
+            QGroupBox { font-weight: bold; border: 1px solid #dcdde1; border-radius: 5px; margin-top: 10px; }
+            QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 3px; }
+        """)
+
+        # Main Layout
+        central_widget = QWidget()
+        self.setCentralWidget(central_widget)
+        self.main_layout = QHBoxLayout(central_widget)
+
+        # Left Panel: Input Form & Balance
+        self.left_panel = QVBoxLayout()
+        self.create_balance_card()
+        self.create_input_form()
+        self.main_layout.addLayout(self.left_panel, 30) # Ratio 30%
+
+        # Right Panel: Table & Chart (Tabs)
+        self.right_panel = QVBoxLayout()
+        self.create_tabs()
+        self.main_layout.addLayout(self.right_panel, 70) # Ratio 70%
+
+        # Load initial data
+        self.load_data()
+
+    def create_balance_card(self):
+        card = QGroupBox("Financial Summary")
+        layout = QVBoxLayout()
+
+        self.lbl_balance = QLabel("Balance: 0.00 THB")
+        self.lbl_balance.setStyleSheet("font-size: 24px; font-weight: bold; color: #2ecc71;")
+        
+        self.lbl_income = QLabel("Total Income: 0.00")
+        self.lbl_income.setStyleSheet("color: #27ae60;")
+        
+        self.lbl_expense = QLabel("Total Expense: 0.00")
+        self.lbl_expense.setStyleSheet("color: #c0392b;")
+
+        layout.addWidget(self.lbl_balance)
+        layout.addWidget(self.lbl_income)
+        layout.addWidget(self.lbl_expense)
+        card.setLayout(layout)
+        self.left_panel.addWidget(card)
+
+    def create_input_form(self):
+        group = QGroupBox("Add Transaction")
+        layout = QVBoxLayout()
+
+        # Type Selection
+        layout.addWidget(QLabel("Type:"))
+        self.combo_type = QComboBox()
+        self.combo_type.addItems(["Expense", "Income"])
+        layout.addWidget(self.combo_type)
+
+        # Date
+        layout.addWidget(QLabel("Date:"))
+        self.date_edit = QDateEdit()
+        self.date_edit.setDate(QDate.currentDate())
+        self.date_edit.setCalendarPopup(True)
+        layout.addWidget(self.date_edit)
+
+        # Category
+        layout.addWidget(QLabel("Category:"))
+        self.input_category = QLineEdit()
+        self.input_category.setPlaceholderText("e.g. Food, Bus, Salary")
+        layout.addWidget(self.input_category)
+
+        # Amount
+        layout.addWidget(QLabel("Amount (THB):"))
+        self.input_amount = QLineEdit()
+        self.input_amount.setPlaceholderText("0.00")
+        layout.addWidget(self.input_amount)
+
+        # Note
+        layout.addWidget(QLabel("Note:"))
+        self.input_note = QLineEdit()
+        layout.addWidget(self.input_note)
+
+        # Add Button
+        self.btn_add = QPushButton("Add Transaction")
+        self.btn_add.clicked.connect(self.add_transaction)
+        layout.addWidget(self.btn_add)
+        
+        layout.addStretch()
+        group.setLayout(layout)
+        self.left_panel.addWidget(group)
+
+    def create_tabs(self):
+        self.tabs = QTabWidget()
+        
+        # Tab 1: Transaction List (Table)
+        self.tab_table = QWidget()
+        table_layout = QVBoxLayout()
+        
+        self.table = QTableWidget()
+        self.table.setColumnCount(6)
+        self.table.setHorizontalHeaderLabels(["ID", "Date", "Category", "Amount", "Type", "Note"])
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.setSelectionBehavior(QTableWidget.SelectRows)
+        self.table.setEditTriggers(QTableWidget.NoEditTriggers) # Read-only
+        
+        self.btn_delete = QPushButton("Delete Selected")
+        self.btn_delete.setObjectName("deleteBtn")
+        self.btn_delete.clicked.connect(self.delete_transaction)
+
+        table_layout.addWidget(self.table)
+        table_layout.addWidget(self.btn_delete)
+        self.tab_table.setLayout(table_layout)
+        
+        self.tabs.addTab(self.tab_table, "Transactions")
+
+        # Tab 2: Charts
+        if MATPLOTLIB_AVAILABLE:
+            self.tab_chart = QWidget()
+            chart_layout = QVBoxLayout()
+            self.canvas = MplCanvas(self, width=5, height=4, dpi=100)
+            chart_layout.addWidget(self.canvas)
+            self.tab_chart.setLayout(chart_layout)
+            self.tabs.addTab(self.tab_chart, "Monthly Overview")
+        else:
+            self.tabs.addTab(QLabel("Matplotlib not installed"), "Monthly Overview")
+
+        self.right_panel.addWidget(self.tabs)
+
+    @Slot()
+    def add_transaction(self):
+        try:
+            # Validate Input
+            amount_text = self.input_amount.text()
+            category = self.input_category.text()
+            
+            if not amount_text or not category:
+                QMessageBox.warning(self, "Error", "Please fill in Amount and Category!")
+                return
+            
+            try:
+                amount = float(amount_text)
+            except ValueError:
+                QMessageBox.warning(self, "Error", "Amount must be a number!")
+                return
+
+            date = self.date_edit.date().toString("yyyy-MM-dd")
+            t_type = self.combo_type.currentText()
+            note = self.input_note.text()
+
+            # Polymorphism / OOP Usage
+            if t_type == "Income":
+                trans = Income(date, category, amount, note)
+            else:
+                trans = Expense(date, category, amount, note)
+
+            # Save to DB
+            self.db.add_transaction(trans)
+
+            # Clear inputs & Refresh
+            self.input_amount.clear()
+            self.input_category.clear()
+            self.input_note.clear()
+            self.load_data()
+            
+            QMessageBox.information(self, "Success", "Transaction added successfully!")
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", str(e))
+
+    @Slot()
+    def delete_transaction(self):
+        selected_row = self.table.currentRow()
+        if selected_row < 0:
+            QMessageBox.warning(self, "Warning", "Please select a row to delete.")
+            return
+
+        # Get ID (Hidden logic or col 0)
+        item_id = self.table.item(selected_row, 0).text()
+        
+        confirm = QMessageBox.question(self, "Confirm", "Are you sure you want to delete this?",
+                                       QMessageBox.Yes | QMessageBox.No)
+        
+        if confirm == QMessageBox.Yes:
+            self.db.delete_transaction(item_id)
+            self.load_data()
+
+    def load_data(self):
+        rows = self.db.get_all_transactions()
+        self.table.setRowCount(0)
+        
+        total_income = 0
+        total_expense = 0
+        expense_by_cat = {}
+
+        for row_idx, row_data in enumerate(rows):
+            self.table.insertRow(row_idx)
+            # row_data: (id, date, category, amount, type, note)
+            for col_idx, data in enumerate(row_data):
+                item = QTableWidgetItem(str(data))
+                if col_idx == 3: # Amount column formatting
+                    item.setText(f"{float(data):,.2f}")
+                
+                # Color code for type
+                if col_idx == 4:
+                    if data == "Income":
+                        item.setForeground(QColor("#27ae60")) # Green
+                    else:
+                        item.setForeground(QColor("#c0392b")) # Red
+                
+                self.table.setItem(row_idx, col_idx, item)
+
+            # Calculate Totals
+            amt = float(row_data[3])
+            t_type = row_data[4]
+            cat = row_data[2]
+
+            if t_type == "Income":
+                total_income += amt
+            else:
+                total_expense += amt
+                # For Chart
+                if cat in expense_by_cat:
+                    expense_by_cat[cat] += amt
+                else:
+                    expense_by_cat[cat] = amt
+
+        # Update Labels
+        balance = total_income - total_expense
+        self.lbl_balance.setText(f"Balance: {balance:,.2f} THB")
+        self.lbl_income.setText(f"Income: +{total_income:,.2f}")
+        self.lbl_expense.setText(f"Expense: -{total_expense:,.2f}")
+
+        # Update Chart
+        if MATPLOTLIB_AVAILABLE and expense_by_cat:
+            self.update_chart(expense_by_cat)
+        elif MATPLOTLIB_AVAILABLE:
+            self.canvas.axes.clear()
+            self.canvas.draw()
+
+    def update_chart(self, data):
+        self.canvas.axes.clear()
+        labels = list(data.keys())
+        values = list(data.values())
+        
+        # Donut Chart Style
+        wedges, texts, autotexts = self.canvas.axes.pie(values, labels=labels, autopct='%1.1f%%', 
+                                                        startangle=90, pctdistance=0.85, 
+                                                        colors=plt.cm.Pastel1.colors)
+        
+        # Add a circle at the center to make it a donut
+        centre_circle = plt.Circle((0,0),0.70,fc='white')
+        self.canvas.axes.add_artist(centre_circle)
+        
+        self.canvas.axes.set_title("Expense Breakdown")
+        self.canvas.draw()
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    
+    # Optional: Set standard font
+    font = QFont("Segoe UI", 10)
+    app.setFont(font)
+    
+    window = BudgetApp()
+    window.show()
+    sys.exit(app.exec())

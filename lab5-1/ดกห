@@ -1,0 +1,215 @@
+import sys
+from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
+                               QHBoxLayout, QLabel, QLineEdit, QPushButton,
+                               QTableWidget, QTableWidgetItem, QComboBox,
+                               QHeaderView, QMessageBox, QFrame, QGroupBox, QDateEdit)
+from PySide6.QtCore import Qt, QDate
+from PySide6.QtGui import QFont
+
+class FoodItem:
+    """คลาสสำหรับเก็บข้อมูลอาหาร"""
+    def __init__(self, date, name, calories_per_100g, amount):
+        self.date = date
+        self.name = name
+        self.calories_per_100g = float(calories_per_100g)
+        self.amount = float(amount)  # กรัม
+        self.total_calories = (self.amount / 100) * self.calories_per_100g
+
+class CalorieCalculator(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.food_items = []
+        self.setWindowTitle("Calorie Calculator")
+        self.setGeometry(100, 100, 600, 500)
+
+        # Style
+        self.setStyleSheet("""
+            QMainWindow { background-color: #f0f8ff; color: #000000; }
+            QLabel { font-size: 14px; color: #2f3640; }
+            QLineEdit, QComboBox, QDateEdit { padding: 8px; border: 1px solid #dcdde1; border-radius: 5px; background-color: white; color: black; }
+            QPushButton { background-color: #4CAF50; color: white; padding: 10px; border-radius: 5px; font-weight: bold; }
+            QPushButton:hover { background-color: #45a049; }
+            QPushButton#deleteBtn { background-color: #f44336; }
+            QPushButton#deleteBtn:hover { background-color: #da190b; }
+            QTableWidget { border: 1px solid #dcdde1; gridline-color: #ecf0f1; background-color: white; color: black; }
+            QHeaderView::section { background-color: #2196F3; color: white; padding: 5px; }
+            QGroupBox { font-weight: bold; border: 1px solid #dcdde1; border-radius: 5px; margin-top: 10px; color: black; }
+            QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 3px; color: black; }
+        """)
+
+        # Main Layout
+        central_widget = QWidget()
+        self.setCentralWidget(central_widget)
+        self.main_layout = QVBoxLayout(central_widget)
+
+        # Total Calories Display
+        self.create_total_display()
+
+        # Input Form
+        self.create_input_form()
+
+        # Food List Table
+        self.create_food_table()
+
+        # Load initial data (empty)
+        self.update_display()
+
+    def create_total_display(self):
+        group = QGroupBox("Calories Summary")
+        layout = QVBoxLayout()
+
+        self.lbl_today = QLabel("Today: 0 kcal")
+        self.lbl_today.setStyleSheet("font-size: 16px; font-weight: bold; color: #FF9800;")
+        
+        self.lbl_total = QLabel("Total All: 0 kcal")
+        self.lbl_total.setStyleSheet("font-size: 18px; font-weight: bold; color: #2196F3;")
+        
+        layout.addWidget(self.lbl_today)
+        layout.addWidget(self.lbl_total)
+
+        group.setLayout(layout)
+        self.main_layout.addWidget(group)
+
+    def create_input_form(self):
+        group = QGroupBox("Add Food")
+        layout = QVBoxLayout()
+
+        # Date
+        layout.addWidget(QLabel("Date:"))
+        self.date_edit = QDateEdit()
+        self.date_edit.setDate(QDate.currentDate())
+        self.date_edit.setCalendarPopup(True)
+        layout.addWidget(self.date_edit)
+
+        # Food Name
+        layout.addWidget(QLabel("Food Name:"))
+        self.input_name = QLineEdit()
+        self.input_name.setPlaceholderText("e.g. Apple")
+        layout.addWidget(self.input_name)
+
+        # Calories per 100g
+        layout.addWidget(QLabel("Calories per 100g:"))
+        self.input_calories = QLineEdit()
+        self.input_calories.setPlaceholderText("e.g. 52")
+        layout.addWidget(self.input_calories)
+
+        # Amount
+        layout.addWidget(QLabel("Amount (grams):"))
+        self.input_amount = QLineEdit()
+        self.input_amount.setPlaceholderText("e.g. 100")
+        layout.addWidget(self.input_amount)
+
+        # Add Button
+        self.btn_add = QPushButton("Add Food")
+        self.btn_add.clicked.connect(self.add_food)
+        layout.addWidget(self.btn_add)
+
+        group.setLayout(layout)
+        self.main_layout.addWidget(group)
+
+    def create_food_table(self):
+        group = QGroupBox("Food List")
+        layout = QVBoxLayout()
+
+        self.table = QTableWidget()
+        self.table.setColumnCount(5)
+        self.table.setHorizontalHeaderLabels(["Date", "Food", "Cal/100g", "Amount (g)", "Total Cal"])
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.setSelectionBehavior(QTableWidget.SelectRows)
+        self.table.setEditTriggers(QTableWidget.NoEditTriggers)
+
+        self.btn_delete = QPushButton("Delete Selected")
+        self.btn_delete.setObjectName("deleteBtn")
+        self.btn_delete.clicked.connect(self.delete_food)
+
+        layout.addWidget(self.table)
+        layout.addWidget(self.btn_delete)
+        group.setLayout(layout)
+        self.main_layout.addWidget(group)
+
+    def add_food(self):
+        try:
+            date = self.date_edit.date().toString("yyyy-MM-dd")
+            name = self.input_name.text()
+            calories_text = self.input_calories.text()
+            amount_text = self.input_amount.text()
+
+            if not name or not calories_text or not amount_text:
+                QMessageBox.warning(self, "Error", "Please fill in all fields!")
+                return
+
+            try:
+                calories_per_100g = float(calories_text)
+                amount = float(amount_text)
+            except ValueError:
+                QMessageBox.warning(self, "Error", "Calories and Amount must be numbers!")
+                return
+
+            if calories_per_100g < 0 or amount <= 0:
+                QMessageBox.warning(self, "Error", "Calories must be non-negative and Amount must be positive!")
+                return
+
+            food_item = FoodItem(date, name, calories_per_100g, amount)
+            self.food_items.append(food_item)
+
+            # Clear inputs
+            self.input_name.clear()
+            self.input_calories.clear()
+            self.input_amount.clear()
+
+            # Update display
+            self.update_display()
+
+            QMessageBox.information(self, "Success", "Food added successfully!")
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", str(e))
+
+    def delete_food(self):
+        selected_row = self.table.currentRow()
+        if selected_row < 0:
+            QMessageBox.warning(self, "Warning", "Please select a row to delete.")
+            return
+
+        confirm = QMessageBox.question(self, "Confirm", "Are you sure you want to delete this food?",
+                                       QMessageBox.Yes | QMessageBox.No)
+
+        if confirm == QMessageBox.Yes:
+            del self.food_items[selected_row]
+            self.update_display()
+
+    def update_display(self):
+        # Sort by date descending
+        self.food_items.sort(key=lambda x: x.date, reverse=True)
+
+        # Update table
+        self.table.setRowCount(0)
+        today = QDate.currentDate().toString("yyyy-MM-dd")
+        today_calories = 0
+        total_calories = 0
+
+        for item in self.food_items:
+            row_position = self.table.rowCount()
+            self.table.insertRow(row_position)
+            self.table.setItem(row_position, 0, QTableWidgetItem(item.date))
+            self.table.setItem(row_position, 1, QTableWidgetItem(item.name))
+            self.table.setItem(row_position, 2, QTableWidgetItem(f"{item.calories_per_100g:.1f}"))
+            self.table.setItem(row_position, 3, QTableWidgetItem(f"{item.amount:.1f}"))
+            self.table.setItem(row_position, 4, QTableWidgetItem(f"{item.total_calories:.1f}"))
+
+            total_calories += item.total_calories
+            if item.date == today:
+                today_calories += item.total_calories
+
+        # Update labels
+        self.lbl_today.setText(f"Today: {today_calories:.1f} kcal")
+        self.lbl_total.setText(f"Total All: {total_calories:.1f} kcal")
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    font = QFont("Segoe UI", 10)
+    app.setFont(font)
+
+    window = CalorieCalculator()
+    window.show()
+    sys.exit(app.exec())

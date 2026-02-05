@@ -1,0 +1,47 @@
+import sys
+from PySide6.QtWidgets import (QApplication, QMainWindow,QLabel,
+                             QVBoxLayout, QWidget, QHBoxLayout,
+                             QGridLayout, QFormLayout, QLineEdit,
+                             QSpinBox, QPushButton)
+from PySide6.QtCore import Qt
+
+class CalculatorLayout(QWidget):
+    def __init__(self):
+        super().__init__()
+        layout = QGridLayout()
+
+        # Basic grid positioning
+        layout.addWidget(QPushButton("7"), 0, 0)  # row 0, col 0
+        layout.addWidget(QPushButton("8"), 0, 1)  # row 0, col 1
+        layout.addWidget(QPushButton("9"), 0, 2)  # row 0, col 2
+        layout.addWidget(QPushButton("="), 1, 1, 2, 2)
+        layout.addWidget(QLabel("This is a calculator"), 1, 0)  
+
+        # Widget spanning multiple cells
+        layout.addWidget(QPushButton("0"), 3, 0, 1, 2)  # row 3, col 0, span 1 row, span 2 cols
+
+        # Spacing and margins
+        layout.setSpacing(10)
+        layout.setContentsMargins(10, 10, 10, 10)
+
+        # Column/Row stretch
+        layout.setColumnStretch(0, 1)  # First column stretches more
+        layout.setRowStretch(1, 2)     # Second row stretches more
+
+        self.setLayout(layout)
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Complex Layout Example")
+        self.setCentralWidget(CalculatorLayout())
+        self.resize(400, 300)
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+
+    window = MainWindow()
+    window.show()
+
+    sys.exit(app.exec())
