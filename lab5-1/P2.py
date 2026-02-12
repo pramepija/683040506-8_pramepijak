@@ -1,3 +1,9 @@
+"""
+Pramepijak ueasri
+683040506-8
+
+"""
+
 import sys
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                              QHBoxLayout, QLabel, QLineEdit, QRadioButton, 
