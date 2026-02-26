@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../app/calorie_calculator"
+		}
+	],
+	"settings": {}
+}
