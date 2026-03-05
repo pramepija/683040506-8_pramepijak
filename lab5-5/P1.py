@@ -257,22 +257,20 @@ class BookingPage(QWidget):
         rx = QRegularExpression(r'^\d{0,15}$')                              # รับแค่ตัวเลข 0-9 ไม่เกิน 15 หลัก
         self.phone_input.setValidator(QRegularExpressionValidator(rx, self))
 
-        en_locale = QLocale(QLocale.English, QLocale.UnitedStates)  # เพิ่ม
+        en_locale = QLocale(QLocale.English, QLocale.UnitedStates) 
 
-        self.checkin_input = QDateEdit()
-        self.checkin_input.setLocale(en_locale)                      # เพิ่ม
         self.checkin_input.setDate(QDate.currentDate())
         self.checkin_input.setDisplayFormat("dd/MM/yyyy")
         self.checkin_input.setCalendarPopup(True)
 
         self.checkout_input = QDateEdit()
-        self.checkout_input.setLocale(en_locale)                     # เพิ่ม
+        self.checkout_input.setLocale(en_locale)                   
         self.checkout_input.setDate(QDate.currentDate().addDays(1))
         self.checkout_input.setDisplayFormat("dd/MM/yyyy")
         self.checkout_input.setCalendarPopup(True)
 
         self.guests_input = QSpinBox()
-        self.guests_input.setLocale(en_locale)                       # เพิ่ม
+        self.guests_input.setLocale(en_locale)               
         self.guests_input.setMinimum(1)
         self.guests_input.setMaximum(10)
         self.guests_input.setValue(1)
