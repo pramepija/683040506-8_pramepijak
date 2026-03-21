@@ -1,0 +1,746 @@
+[
+  {
+    "date": "2024-01-01",
+    "city": "Bangkok",
+    "temp_c": 28.2,
+    "humidity": 78,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-01",
+    "city": "Chiang Mai",
+    "temp_c": 18.3,
+    "humidity": 53,
+    "rainfall_mm": 18.5,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-01",
+    "city": "Phuket",
+    "temp_c": 28.7,
+    "humidity": 88,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-02",
+    "city": "Bangkok",
+    "temp_c": 28.7,
+    "humidity": 77,
+    "rainfall_mm": 45.3,
+    "condition": "Stormy"
+  },
+  {
+    "date": "2024-01-02",
+    "city": "Chiang Mai",
+    "temp_c": 18.8,
+    "humidity": 70,
+    "rainfall_mm": 55.1,
+    "condition": "Stormy"
+  },
+  {
+    "date": "2024-01-02",
+    "city": "Phuket",
+    "temp_c": 31.6,
+    "humidity": 83,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-03",
+    "city": "Bangkok",
+    "temp_c": 28.0,
+    "humidity": 95,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-03",
+    "city": "Chiang Mai",
+    "temp_c": 20.8,
+    "humidity": 58,
+    "rainfall_mm": 8.1,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-03",
+    "city": "Phuket",
+    "temp_c": 30.7,
+    "humidity": 77,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-04",
+    "city": "Bangkok",
+    "temp_c": 30.5,
+    "humidity": 81,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-04",
+    "city": "Chiang Mai",
+    "temp_c": 24.3,
+    "humidity": 73,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-04",
+    "city": "Phuket",
+    "temp_c": 29.0,
+    "humidity": 87,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-05",
+    "city": "Bangkok",
+    "temp_c": 30.1,
+    "humidity": 90,
+    "rainfall_mm": 17.4,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-05",
+    "city": "Chiang Mai",
+    "temp_c": 22.2,
+    "humidity": 72,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-05",
+    "city": "Phuket",
+    "temp_c": 33.3,
+    "humidity": 84,
+    "rainfall_mm": 24.7,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-06",
+    "city": "Bangkok",
+    "temp_c": 34.1,
+    "humidity": 82,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-06",
+    "city": "Chiang Mai",
+    "temp_c": 22.7,
+    "humidity": 61,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-06",
+    "city": "Phuket",
+    "temp_c": 30.8,
+    "humidity": 83,
+    "rainfall_mm": 19.0,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-07",
+    "city": "Bangkok",
+    "temp_c": 28.5,
+    "humidity": 90,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-07",
+    "city": "Chiang Mai",
+    "temp_c": 23.6,
+    "humidity": 55,
+    "rainfall_mm": 14.2,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-07",
+    "city": "Phuket",
+    "temp_c": 35.4,
+    "humidity": 92,
+    "rainfall_mm": 9.4,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-08",
+    "city": "Bangkok",
+    "temp_c": 33.4,
+    "humidity": 71,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-08",
+    "city": "Chiang Mai",
+    "temp_c": 17.3,
+    "humidity": 60,
+    "rainfall_mm": 13.0,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-08",
+    "city": "Phuket",
+    "temp_c": 35.3,
+    "humidity": 85,
+    "rainfall_mm": 9.3,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-09",
+    "city": "Bangkok",
+    "temp_c": 34.2,
+    "humidity": 90,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-09",
+    "city": "Chiang Mai",
+    "temp_c": 19.4,
+    "humidity": 57,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-09",
+    "city": "Phuket",
+    "temp_c": 32.3,
+    "humidity": 88,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-10",
+    "city": "Bangkok",
+    "temp_c": 30.8,
+    "humidity": 77,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-10",
+    "city": "Chiang Mai",
+    "temp_c": 18.2,
+    "humidity": 65,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-10",
+    "city": "Phuket",
+    "temp_c": 28.4,
+    "humidity": 78,
+    "rainfall_mm": 8.1,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-11",
+    "city": "Bangkok",
+    "temp_c": 32.8,
+    "humidity": 89,
+    "rainfall_mm": 6.3,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-11",
+    "city": "Chiang Mai",
+    "temp_c": 26.0,
+    "humidity": 66,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-11",
+    "city": "Phuket",
+    "temp_c": 32.4,
+    "humidity": 75,
+    "rainfall_mm": 18.6,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-12",
+    "city": "Bangkok",
+    "temp_c": 34.2,
+    "humidity": 94,
+    "rainfall_mm": 10.3,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-12",
+    "city": "Chiang Mai",
+    "temp_c": 18.0,
+    "humidity": 63,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-12",
+    "city": "Phuket",
+    "temp_c": 28.0,
+    "humidity": 83,
+    "rainfall_mm": 24.4,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-13",
+    "city": "Bangkok",
+    "temp_c": 31.6,
+    "humidity": 73,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-13",
+    "city": "Chiang Mai",
+    "temp_c": 19.7,
+    "humidity": 70,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-13",
+    "city": "Phuket",
+    "temp_c": 29.6,
+    "humidity": 86,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-14",
+    "city": "Bangkok",
+    "temp_c": 31.8,
+    "humidity": 94,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-14",
+    "city": "Chiang Mai",
+    "temp_c": 25.3,
+    "humidity": 69,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-14",
+    "city": "Phuket",
+    "temp_c": 28.2,
+    "humidity": 86,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-15",
+    "city": "Bangkok",
+    "temp_c": 33.8,
+    "humidity": 79,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-15",
+    "city": "Chiang Mai",
+    "temp_c": 19.2,
+    "humidity": 68,
+    "rainfall_mm": 23.9,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-15",
+    "city": "Phuket",
+    "temp_c": 31.9,
+    "humidity": 77,
+    "rainfall_mm": 24.6,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-16",
+    "city": "Bangkok",
+    "temp_c": 28.9,
+    "humidity": 91,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-16",
+    "city": "Chiang Mai",
+    "temp_c": 21.9,
+    "humidity": 58,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-16",
+    "city": "Phuket",
+    "temp_c": 32.9,
+    "humidity": 81,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-17",
+    "city": "Bangkok",
+    "temp_c": 33.3,
+    "humidity": 92,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-17",
+    "city": "Chiang Mai",
+    "temp_c": 19.8,
+    "humidity": 71,
+    "rainfall_mm": 18.0,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-17",
+    "city": "Phuket",
+    "temp_c": 32.1,
+    "humidity": 78,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-18",
+    "city": "Bangkok",
+    "temp_c": 28.4,
+    "humidity": 70,
+    "rainfall_mm": 16.8,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-18",
+    "city": "Chiang Mai",
+    "temp_c": 19.0,
+    "humidity": 52,
+    "rainfall_mm": 19.2,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-18",
+    "city": "Phuket",
+    "temp_c": 28.5,
+    "humidity": 76,
+    "rainfall_mm": 22.2,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-19",
+    "city": "Bangkok",
+    "temp_c": 29.7,
+    "humidity": 91,
+    "rainfall_mm": 14.7,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-19",
+    "city": "Chiang Mai",
+    "temp_c": 23.5,
+    "humidity": 68,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-19",
+    "city": "Phuket",
+    "temp_c": 29.9,
+    "humidity": 90,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-20",
+    "city": "Bangkok",
+    "temp_c": 29.3,
+    "humidity": 73,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-20",
+    "city": "Chiang Mai",
+    "temp_c": 20.2,
+    "humidity": 63,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-20",
+    "city": "Phuket",
+    "temp_c": 33.8,
+    "humidity": 78,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-21",
+    "city": "Bangkok",
+    "temp_c": 33.1,
+    "humidity": 95,
+    "rainfall_mm": 22.2,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-21",
+    "city": "Chiang Mai",
+    "temp_c": 18.7,
+    "humidity": 64,
+    "rainfall_mm": 7.8,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-21",
+    "city": "Phuket",
+    "temp_c": 31.7,
+    "humidity": 77,
+    "rainfall_mm": 13.9,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-22",
+    "city": "Bangkok",
+    "temp_c": 31.9,
+    "humidity": 71,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-22",
+    "city": "Chiang Mai",
+    "temp_c": 21.9,
+    "humidity": 50,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-22",
+    "city": "Phuket",
+    "temp_c": 35.4,
+    "humidity": 82,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-23",
+    "city": "Bangkok",
+    "temp_c": 31.4,
+    "humidity": 76,
+    "rainfall_mm": 22.3,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-23",
+    "city": "Chiang Mai",
+    "temp_c": 18.5,
+    "humidity": 50,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-23",
+    "city": "Phuket",
+    "temp_c": 30.1,
+    "humidity": 89,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-24",
+    "city": "Bangkok",
+    "temp_c": 32.9,
+    "humidity": 93,
+    "rainfall_mm": 24.9,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-24",
+    "city": "Chiang Mai",
+    "temp_c": 23.5,
+    "humidity": 54,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-24",
+    "city": "Phuket",
+    "temp_c": 29.7,
+    "humidity": 76,
+    "rainfall_mm": 16.6,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-25",
+    "city": "Bangkok",
+    "temp_c": 33.2,
+    "humidity": 71,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-25",
+    "city": "Chiang Mai",
+    "temp_c": 21.3,
+    "humidity": 66,
+    "rainfall_mm": 8.1,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-25",
+    "city": "Phuket",
+    "temp_c": 28.6,
+    "humidity": 80,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-26",
+    "city": "Bangkok",
+    "temp_c": 28.5,
+    "humidity": 77,
+    "rainfall_mm": 13.1,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-26",
+    "city": "Chiang Mai",
+    "temp_c": 22.1,
+    "humidity": 68,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-26",
+    "city": "Phuket",
+    "temp_c": 33.0,
+    "humidity": 88,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-27",
+    "city": "Bangkok",
+    "temp_c": 32.0,
+    "humidity": 80,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-27",
+    "city": "Chiang Mai",
+    "temp_c": 18.8,
+    "humidity": 72,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-27",
+    "city": "Phuket",
+    "temp_c": 30.1,
+    "humidity": 79,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-28",
+    "city": "Bangkok",
+    "temp_c": 30.1,
+    "humidity": 80,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-28",
+    "city": "Chiang Mai",
+    "temp_c": 25.4,
+    "humidity": 50,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-28",
+    "city": "Phuket",
+    "temp_c": 36.0,
+    "humidity": 78,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-29",
+    "city": "Bangkok",
+    "temp_c": 29.5,
+    "humidity": 78,
+    "rainfall_mm": 7.6,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-29",
+    "city": "Chiang Mai",
+    "temp_c": 17.6,
+    "humidity": 57,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-29",
+    "city": "Phuket",
+    "temp_c": 29.3,
+    "humidity": 92,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-30",
+    "city": "Bangkok",
+    "temp_c": 32.3,
+    "humidity": 95,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-30",
+    "city": "Chiang Mai",
+    "temp_c": 17.1,
+    "humidity": 67,
+    "rainfall_mm": 0.0,
+    "condition": "Sunny"
+  },
+  {
+    "date": "2024-01-30",
+    "city": "Phuket",
+    "temp_c": 33.3,
+    "humidity": 79,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-31",
+    "city": "Bangkok",
+    "temp_c": 34.2,
+    "humidity": 93,
+    "rainfall_mm": 16.1,
+    "condition": "Rainy"
+  },
+  {
+    "date": "2024-01-31",
+    "city": "Chiang Mai",
+    "temp_c": 22.4,
+    "humidity": 72,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  },
+  {
+    "date": "2024-01-31",
+    "city": "Phuket",
+    "temp_c": 33.5,
+    "humidity": 83,
+    "rainfall_mm": 0.0,
+    "condition": "Cloudy"
+  }
+]

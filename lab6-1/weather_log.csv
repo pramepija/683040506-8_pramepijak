@@ -1,0 +1,94 @@
+date,city,temp_c,humidity,rainfall_mm,condition
+2024-01-01,Bangkok,28.2,78,0.0,Sunny
+2024-01-01,Chiang Mai,18.3,53,18.5,Rainy
+2024-01-01,Phuket,28.7,88,0.0,Sunny
+2024-01-02,Bangkok,28.7,77,45.3,Stormy
+2024-01-02,Chiang Mai,18.8,70,55.1,Stormy
+2024-01-02,Phuket,31.6,83,0.0,Cloudy
+2024-01-03,Bangkok,28.0,95,0.0,Sunny
+2024-01-03,Chiang Mai,20.8,58,8.1,Rainy
+2024-01-03,Phuket,30.7,77,0.0,Sunny
+2024-01-04,Bangkok,30.5,81,0.0,Cloudy
+2024-01-04,Chiang Mai,24.3,73,0.0,Sunny
+2024-01-04,Phuket,29.0,87,0.0,Cloudy
+2024-01-05,Bangkok,30.1,90,17.4,Rainy
+2024-01-05,Chiang Mai,22.2,72,0.0,Sunny
+2024-01-05,Phuket,33.3,84,24.7,Rainy
+2024-01-06,Bangkok,34.1,82,0.0,Sunny
+2024-01-06,Chiang Mai,22.7,61,0.0,Cloudy
+2024-01-06,Phuket,30.8,83,19.0,Rainy
+2024-01-07,Bangkok,28.5,90,0.0,Sunny
+2024-01-07,Chiang Mai,23.6,55,14.2,Rainy
+2024-01-07,Phuket,35.4,92,9.4,Rainy
+2024-01-08,Bangkok,33.4,71,0.0,Cloudy
+2024-01-08,Chiang Mai,17.3,60,13.0,Rainy
+2024-01-08,Phuket,35.3,85,9.3,Rainy
+2024-01-09,Bangkok,34.2,90,0.0,Cloudy
+2024-01-09,Chiang Mai,19.4,57,0.0,Cloudy
+2024-01-09,Phuket,32.3,88,0.0,Sunny
+2024-01-10,Bangkok,30.8,77,0.0,Sunny
+2024-01-10,Chiang Mai,18.2,65,0.0,Sunny
+2024-01-10,Phuket,28.4,78,8.1,Rainy
+2024-01-11,Bangkok,32.8,89,6.3,Rainy
+2024-01-11,Chiang Mai,26.0,66,0.0,Cloudy
+2024-01-11,Phuket,32.4,75,18.6,Rainy
+2024-01-12,Bangkok,34.2,94,10.3,Rainy
+2024-01-12,Chiang Mai,18.0,63,0.0,Sunny
+2024-01-12,Phuket,28.0,83,24.4,Rainy
+2024-01-13,Bangkok,31.6,73,0.0,Sunny
+2024-01-13,Chiang Mai,19.7,70,0.0,Sunny
+2024-01-13,Phuket,29.6,86,0.0,Cloudy
+2024-01-14,Bangkok,31.8,94,0.0,Sunny
+2024-01-14,Chiang Mai,25.3,69,0.0,Sunny
+2024-01-14,Phuket,28.2,86,0.0,Cloudy
+2024-01-15,Bangkok,33.8,79,0.0,Sunny
+2024-01-15,Chiang Mai,19.2,68,23.9,Rainy
+2024-01-15,Phuket,31.9,77,24.6,Rainy
+2024-01-16,Bangkok,28.9,91,0.0,Cloudy
+2024-01-16,Chiang Mai,21.9,58,0.0,Cloudy
+2024-01-16,Phuket,32.9,81,0.0,Cloudy
+2024-01-17,Bangkok,33.3,92,0.0,Sunny
+2024-01-17,Chiang Mai,19.8,71,18.0,Rainy
+2024-01-17,Phuket,32.1,78,0.0,Cloudy
+2024-01-18,Bangkok,28.4,70,16.8,Rainy
+2024-01-18,Chiang Mai,19.0,52,19.2,Rainy
+2024-01-18,Phuket,28.5,76,22.2,Rainy
+2024-01-19,Bangkok,29.7,91,14.7,Rainy
+2024-01-19,Chiang Mai,23.5,68,0.0,Sunny
+2024-01-19,Phuket,29.9,90,0.0,Sunny
+2024-01-20,Bangkok,29.3,73,0.0,Sunny
+2024-01-20,Chiang Mai,20.2,63,0.0,Sunny
+2024-01-20,Phuket,33.8,78,0.0,Cloudy
+2024-01-21,Bangkok,33.1,95,22.2,Rainy
+2024-01-21,Chiang Mai,18.7,64,7.8,Rainy
+2024-01-21,Phuket,31.7,77,13.9,Rainy
+2024-01-22,Bangkok,31.9,71,0.0,Sunny
+2024-01-22,Chiang Mai,21.9,50,0.0,Sunny
+2024-01-22,Phuket,35.4,82,0.0,Sunny
+2024-01-23,Bangkok,31.4,76,22.3,Rainy
+2024-01-23,Chiang Mai,18.5,50,0.0,Sunny
+2024-01-23,Phuket,30.1,89,0.0,Sunny
+2024-01-24,Bangkok,32.9,93,24.9,Rainy
+2024-01-24,Chiang Mai,23.5,54,0.0,Sunny
+2024-01-24,Phuket,29.7,76,16.6,Rainy
+2024-01-25,Bangkok,33.2,71,0.0,Cloudy
+2024-01-25,Chiang Mai,21.3,66,8.1,Rainy
+2024-01-25,Phuket,28.6,80,0.0,Sunny
+2024-01-26,Bangkok,28.5,77,13.1,Rainy
+2024-01-26,Chiang Mai,22.1,68,0.0,Sunny
+2024-01-26,Phuket,33.0,88,0.0,Sunny
+2024-01-27,Bangkok,32.0,80,0.0,Sunny
+2024-01-27,Chiang Mai,18.8,72,0.0,Sunny
+2024-01-27,Phuket,30.1,79,0.0,Cloudy
+2024-01-28,Bangkok,30.1,80,0.0,Sunny
+2024-01-28,Chiang Mai,25.4,50,0.0,Sunny
+2024-01-28,Phuket,36.0,78,0.0,Cloudy
+2024-01-29,Bangkok,29.5,78,7.6,Rainy
+2024-01-29,Chiang Mai,17.6,57,0.0,Cloudy
+2024-01-29,Phuket,29.3,92,0.0,Cloudy
+2024-01-30,Bangkok,32.3,95,0.0,Sunny
+2024-01-30,Chiang Mai,17.1,67,0.0,Sunny
+2024-01-30,Phuket,33.3,79,0.0,Cloudy
+2024-01-31,Bangkok,34.2,93,16.1,Rainy
+2024-01-31,Chiang Mai,22.4,72,0.0,Cloudy
+2024-01-31,Phuket,33.5,83,0.0,Cloudy
