@@ -1,0 +1,43 @@
+import sys
+from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QMainWindow, QLabel, QPushButton, QWidget, QVBoxLayout
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Status Bar Demo")
+        self.resize(400, 300)
+
+        # Temporary message — shown on the left
+        self.statusBar().showMessage("Ready")
+
+        # Permanent widget — always visible on the right
+        self._user_label = QLabel("User: Admin")
+        self.statusBar().addPermanentWidget(self._user_label)
+
+        # Central Widget
+        central = QWidget()
+        layout = QVBoxLayout(central)
+
+        btn_hello = QPushButton("Say Hello")
+        btn_hello.clicked.connect(self.say_hello)
+
+        btn_warn = QPushButton("Warn")
+        btn_warn.clicked.connect(self.show_warning)
+
+        layout.addWidget(btn_hello)
+        layout.addWidget(btn_warn)
+        self.setCentralWidget(central)
+
+    def say_hello(self):
+        # Disappears automatically after 3 seconds
+        self.statusBar().showMessage("Hello!", 3000)
+
+    def show_warning(self):
+        self.statusBar().showMessage("⚠ Something went wrong!", 3000)
+
+
+app = QApplication(sys.argv)
+window = MainWindow()
+window.show()
+app.exec()
